@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block center %}
+<form action="{{ url_for('rooms.edit_room', id=room.id) }}" method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Номер кімнати</label>
+        <input type="number" class="form-control" name="number" value="{{ request.form.get('number') or room.number }}">
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Поверх кімнати</label>
+        <input type="number" class="form-control" name="floor" value="{{ request.form.get('floor') or room.floor }}">
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Ціна за ніч</label>
+        <input type="number" class="form-control" name="price" value="{{ request.form.get('price') or room.price }}">
+    </div>
+    <div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" role="switch" name="is_reserves" {% if room.is_reserved %} checked {% endif %}>
+    <label class="form-check-label" for="flexSwitchCheckChecked">Зарезервована</label>
+    </div>
+    <div class="mb-3">
+        <img src="{{ room.img_url }}" class="d-block w-100">
+        <label for="exampleFormControlInput1" class="form-label">Виберіть зображення кімнати</label>
+        <input type="file" class="form-control" name="photo">
+    </div>
+    <button class="btn btn-success" type="submit">Змінити кімнату</button>
+</form>
+{% endblock center %}
